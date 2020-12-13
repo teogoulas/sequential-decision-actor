@@ -124,9 +124,9 @@ class Node:
         self.x = x
         self.y = y
         self.parent = parent
-        self.g = 0  # Distance to start node
-        self.h = 0  # Distance to goal node
-        self.f = 0  # Total cost
+        self.g = 0  # Path total utility until current node
+        self.h = 0  # Node utility
+        self.f = 0  # Sum of node g and h values
 
     # Compare nodes
     def __eq__(self, other):
@@ -140,6 +140,7 @@ class Node:
     def __repr__(self):
         return '({0},{1},{2})'.format(self.x, self.y, self.f)
 
+    # Get node index
     def get_index(self):
         index = 4 * self.x + self.y
         if index >= 5:
@@ -183,7 +184,6 @@ def a_star_search(initial_node: Node, goal_node: Node, v_star_function: []):
             while current_node != initial_node:
                 path.append(current_node.get_index())
                 current_node = current_node.parent
-            # path.append(start)
             # Return reversed path
             path.append(initial_node.get_index())
             return path[::-1]
