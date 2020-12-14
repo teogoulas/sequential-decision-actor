@@ -217,7 +217,7 @@ def add_to_open(open_list, neighbor):
 
 
 optimal_V = {}
-for g in [0.9, 0.6, 0.2]:
+for g in [1, 0.9, 0.6, 0.2]:
     V_star_value, pi_star_value = value_iteration(P, g)
     optimal_V[g] = V_star_value
 
