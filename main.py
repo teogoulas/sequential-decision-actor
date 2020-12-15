@@ -221,9 +221,14 @@ for g in [1, 0.9, 0.6, 0.2]:
     V_star_value, pi_star_value = value_iteration(P, g)
     optimal_V[g] = V_star_value
 
-    print("For g: {:2f} the optimal V function is the following:".format(g))
-    print(V_star_value)
-    print("Optimal policy is the following:")
+    print("For g = {:2f}\n".format(g))
+    print("The optimal V function is the following:")
+    k = 0
+    for v in V_star_value:
+        print("{:d}: {:2f}".format(k, v))
+        k = k + 1
+    print("\n")
+    print("The optimal policy is the following:")
     policy = ""
     for i in [2, 1, 0]:
         for j in range(4):
@@ -250,4 +255,6 @@ for g in [1, 0.9, 0.6, 0.2]:
     print(policy)
 
     a_star_path = a_star_search(Node(0, 0, None), Node(2, 3, None), V_star_value)
+    print("The optimal path is the following:")
     print(a_star_path)
+    print("\n")
