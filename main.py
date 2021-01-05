@@ -216,45 +216,46 @@ def add_to_open(open_list, neighbor):
     return True
 
 
-optimal_V = {}
-for g in [1, 0.9, 0.6, 0.2]:
-    V_star_value, pi_star_value = value_iteration(P, g)
-    optimal_V[g] = V_star_value
+if __name__ == '__main__':
+    optimal_V = {}
+    for g in [1, 0.9, 0.6, 0.2]:
+        V_star_value, pi_star_value = value_iteration(P, g)
+        optimal_V[g] = V_star_value
 
-    print("For g = {:2f}\n".format(g))
-    print("The optimal V function is the following:")
-    k = 0
-    for v in V_star_value:
-        print("{:d}: {:2f}".format(k, v))
-        k = k + 1
-    print("\n")
-    print("The optimal policy is the following:")
-    policy = ""
-    for i in [2, 1, 0]:
-        for j in range(4):
-            policy_index = 4 * i + j
-            if policy_index == 5:
-                policy += "| X "
-            elif policy_index == 11:
-                policy += "| O "
-            elif policy_index == 7:
-                policy += "| - "
-            else:
-                if policy_index > 5:
-                    policy_index -= 1
-
-                if pi_star_value[policy_index] == 0:
-                    policy += "| ← "
-                elif pi_star_value[policy_index] == 1:
-                    policy += "| ↑ "
-                elif pi_star_value[policy_index] == 2:
-                    policy += "| → "
+        print("For g = {:2f}\n".format(g))
+        print("The optimal V function is the following:")
+        k = 0
+        for v in V_star_value:
+            print("{:d}: {:2f}".format(k, v))
+            k = k + 1
+        print("\n")
+        print("The optimal policy is the following:")
+        policy = ""
+        for i in [2, 1, 0]:
+            for j in range(4):
+                policy_index = 4 * i + j
+                if policy_index == 5:
+                    policy += "| X "
+                elif policy_index == 11:
+                    policy += "| O "
+                elif policy_index == 7:
+                    policy += "| - "
                 else:
-                    policy += "| ↓ "
-        policy += "|\n"
-    print(policy)
+                    if policy_index > 5:
+                        policy_index -= 1
 
-    a_star_path = a_star_search(Node(0, 0, None), Node(2, 3, None), V_star_value)
-    print("The optimal path is the following:")
-    print(a_star_path)
-    print("\n")
+                    if pi_star_value[policy_index] == 0:
+                        policy += "| ← "
+                    elif pi_star_value[policy_index] == 1:
+                        policy += "| ↑ "
+                    elif pi_star_value[policy_index] == 2:
+                        policy += "| → "
+                    else:
+                        policy += "| ↓ "
+            policy += "|\n"
+        print(policy)
+
+        a_star_path = a_star_search(Node(0, 0, None), Node(2, 3, None), V_star_value)
+        print("The optimal path is the following:")
+        print(a_star_path)
+        print("\n")
